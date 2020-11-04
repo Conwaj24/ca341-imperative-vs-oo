@@ -31,8 +31,8 @@ clean:
 push:
 	git push origin --tags
 
-test: 
-	echo test
+test: phonebook.o
+	./phonebook.o
 
 
 .PHONY: all install uninstall clean push
