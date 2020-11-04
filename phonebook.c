@@ -22,10 +22,23 @@ phonebookEntry *newPhonebookEntry(char *name, char *address, int number) {
 	return out;
 }
 
+void freePhonebookEntry(phonebookEntry *pbe) {
+	free(pbe->name);
+	free(pbe->address);
+	free(pbe);
+}
+
 node *newNode(phonebookEntry *data) {
 	node *out = malloc(sizeof(node));
 	out->data = data;
 	return out;
+}
+
+void freeNode(node *n) {
+	free(n->left);
+	free(n->right);
+	freePhonebookEntry(n->data);
+	free(n);
 }
 
 void addToTree(phonebookEntry *item, node *root) {
@@ -38,5 +51,7 @@ void display(phonebookEntry *pbe){
 int main() {
 	phonebookEntry *pbe = newPhonebookEntry("steve", "nowhere", 19216811);
 	display(pbe);
+	node *n = newNode(pbe);
+	freeNode(n);
 	return 0;
 }
