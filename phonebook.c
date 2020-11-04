@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 typedef struct {
 	char *name;
 	char *address;
@@ -29,16 +28,15 @@ node *newNode(phonebookEntry *data) {
 	return out;
 }
 
-void addToTree(phonebookEntry item, node *root) {
-
+void addToTree(phonebookEntry *item, node *root) {
 }
 
-void display(phonebookEntry pbe){
-	fprintf(stdout, "%s\n%s\n%i\n", pbe.name, pbe.address, pbe.number);
+void display(phonebookEntry *pbe){
+	fprintf(stdout, "%s\n%s\n%i\n", pbe->name, pbe->address, pbe->number);
 }
 
 int main() {
-	phonebookEntry pbe = (phonebookEntry) {"steve", "nowhere", 19216811};
+	phonebookEntry *pbe = newPhonebookEntry("steve", "nowhere", 19216811);
 	display(pbe);
 	return 0;
 }
