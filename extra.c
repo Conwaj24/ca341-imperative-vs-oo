@@ -1,4 +1,4 @@
-//the following code is part of umenu (https://github.com/JCoMcL/umenu), whixh is owned by me
+//the following code is part of umenu (https://github.com/JCoMcL/umenu), which is owned by me (Jordan Conway-McLaughlin)
 //see licence (https://raw.githubusercontent.com/JCoMcL/umenu/master/LICENSE)
 
 #include <stdio.h>
@@ -9,8 +9,13 @@
 
 #define RED(s) "\e[91m" s "\e[39m"
 
+void error(const char *s) {
+	fprintf(stderr, RED("%s\n"), s);
+}
+
 void die(const char *s) {
-	if(s) { fprintf(stderr, RED("%s\n"), s);}
+	if (s)
+		error(s);
 	exit(1);
 }
 

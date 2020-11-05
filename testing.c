@@ -1,9 +1,25 @@
 #include "extra.c"
 #include "phonebook.c"
-
 #define RED(s) "\e[91m" s "\e[39m"
-void exploreTree(node *root) {
-	
+
+void exploreTree(node *curr) {
+	for (;;) {
+		display(curr);
+		char c = getUserInput();
+		switch (c) {
+			case 'j':
+				exploreTree(curr->left);
+				break;
+			case 'l':
+				exploreTree(curr->right);
+				break;
+			case 'k':
+				return;
+				break;
+			default:
+				error("invalid key");
+		}
+	}
 }
 
 int main() {
@@ -21,8 +37,7 @@ int main() {
 	addToTree(newPhonebookEntry("kate", "i", 3), root);
 	addToTree(newPhonebookEntry("jamie", "j", 7), root);
 
-	//display(searchTreeForNumber(root, 12));
-	//display(searchTreeForNumber(root, 6));
+	exploreTree(root);
 	freeNode(root);
 	return 0;
 }
