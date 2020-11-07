@@ -16,6 +16,8 @@ typedef struct node {
 	phonebookEntry *data;
 } node;
 
+node *root;
+
 phonebookEntry *newPhonebookEntry(char *name, char *address, int number) {
 	phonebookEntry *out = malloc(sizeof(phonebookEntry));
 	out->name = strdup(name);
@@ -66,7 +68,7 @@ node *searchTreeForNumber(int number, node *root) {
 	return root;
 }
 
-void addNodeToTree(node *n, node *root) {
+void addNodeToTree(node *n) {
 	if (n == NULL)
 		return;
 	node *parent = searchTreeForNumber(n->data->number, root);
@@ -80,9 +82,9 @@ void addNodeToTree(node *n, node *root) {
 	}
 }
 
-void addToTree(phonebookEntry *item, node *root) {
+void addToTree(phonebookEntry *item) {
 	node *n = newNode(item); 
-	addNodeToTree(n, root);
+	addNodeToTree(n);
 }
 
 node *findNode(node *root, int number) {
@@ -92,28 +94,30 @@ node *findNode(node *root, int number) {
 	return n;
 }
 
-bool kidnap(node *n) {
+void kidnap(node *n) {
 	//remove node from its parent
 	if (! n->parent)
-		return false;
+		return;
 
 	if (n->parent->left == n)
 		n->parent->left = NULL;
 	else
 		n->parent->right = NULL;
-	return true;
 }
 	
 void removeNodeFromTree(node* n) {
 	kidnap(n);
-	addNodeToTree(n->left, n->parent);
+	if (!n->parent)
+		root = n->left;
+	else
+		addNodeToTree(n->left);
 	n->left = NULL;
-	addNodeToTree(n->right, n->parent);
+	addNodeToTree(n->right);
 	n->right = NULL;
 	freeNode(n);
 }
 
-void removeFromTree(int key, node *root) {
+void removeFromTree(int key) {
 	node *n = findNode(root, key);
 	if (n != NULL) 
 		removeNodeFromTree(n);

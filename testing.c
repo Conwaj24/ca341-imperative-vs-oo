@@ -17,8 +17,8 @@ void exploreTree(node *curr) {
 				return;
 				break;
 			case 'x':
-				removeNodeFromTree(curr);
-				return;
+				removeFromTree(curr->data->number);
+				exploreTree(root);
 			default:
 				error("invalid key");
 		}
@@ -26,19 +26,18 @@ void exploreTree(node *curr) {
 }
 
 int main() {
-	phonebookEntry *pbe = newPhonebookEntry("steve", "nowhere", 10);
-	node *root = newNode(pbe);
+	root = newNode(newPhonebookEntry("steve", "nowhere", 10));
 
-	addToTree(newPhonebookEntry("john", "a", 6), root);
-	addToTree(newPhonebookEntry("jill", "b", 18), root);
-	addToTree(newPhonebookEntry("sam", "c", 12), root);
-	addToTree(newPhonebookEntry("guy", "d", 0), root);
-	addToTree(newPhonebookEntry("norm elman", "e", 32), root);
-	addToTree(newPhonebookEntry("stew", "f", 17), root);
-	addToTree(newPhonebookEntry("alice", "g", 9), root);
-	addToTree(newPhonebookEntry("kevin", "h", 1), root);
-	addToTree(newPhonebookEntry("kate", "i", 3), root);
-	addToTree(newPhonebookEntry("jamie", "j", 7), root);
+	addToTree(newPhonebookEntry("john", "a", 6));
+	addToTree(newPhonebookEntry("jill", "b", 18));
+	addToTree(newPhonebookEntry("sam", "c", 12));
+	addToTree(newPhonebookEntry("guy", "d", 0));
+	addToTree(newPhonebookEntry("norm elman", "e", 32));
+	addToTree(newPhonebookEntry("stew", "f", 17));
+	addToTree(newPhonebookEntry("alice", "g", 9));
+	addToTree(newPhonebookEntry("kevin", "h", 1));
+	addToTree(newPhonebookEntry("kate", "i", 3));
+	addToTree(newPhonebookEntry("jamie", "j", 7));
 
 	exploreTree(root);
 	freeNode(root);
