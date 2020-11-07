@@ -81,11 +81,13 @@ void addNodeToTree(node *n) {
 	node *parent = searchTreeForNumber(n->data->number, root);
 	n->parent = parent;
 	if (n->data->number < parent->data->number) {
-		n->left = parent->left;
+		node *orphan = parent->left;
 		parent->left = n;
+		addNodeToTree(orphan);
 	} else {
-		n->right = parent->right;
+		node *orphan = parent->right;
 		parent->right = n;
+		addNodeToTree(orphan);
 	}
 }
 
@@ -109,7 +111,7 @@ void kidnap(node *n) {
 	else
 		n->parent->right = NULL;
 }
-	
+
 void setAsRoot(node *n) {
 	root = n;
 	n->parent=NULL;
