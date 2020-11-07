@@ -123,8 +123,8 @@ void removeNodeFromTree(node* n) {
 		setAsRoot(n->left);
 		addNodeToTree(n->right);
 		freeNode(n);
-	} else if (n == root && n->left) {
-		setAsRoot(n->left);
+	} else if (n == root && n->right) {
+		setAsRoot(n->right);
 		freeNode(n);
 	} else if (n == root) {
 		root = NULL;
