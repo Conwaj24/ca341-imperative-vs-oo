@@ -16,6 +16,9 @@ void exploreTree(node *curr) {
 			case 'k':
 				return;
 				break;
+			case 'x':
+				removeNodeFromTree(curr);
+				return;
 			default:
 				error("invalid key");
 		}
