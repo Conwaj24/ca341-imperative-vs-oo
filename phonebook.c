@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdbool.h>
 
+#define NOTNULL(n) if(!n) {return;}
+
 typedef struct {
 	char *name;
 	char *address;
@@ -42,10 +44,16 @@ node *newNode(phonebookEntry *data) {
 }
 
 void freeNode(node *n) {
-	free(n->left);
-	free(n->right);
+	NOTNULL(n)
 	freePhonebookEntry(n->data);
 	free(n);
+}
+
+void freeTree(node *n) {
+	NOTNULL(n)
+	freeTree(n->left);
+	freeTree(n->right);
+	freeNode(n);
 }
 
 void displaypbe(phonebookEntry *pbe){
@@ -69,8 +77,7 @@ node *searchTreeForNumber(int number, node *root) {
 }
 
 void addNodeToTree(node *n) {
-	if (n == NULL)
-		return;
+	NOTNULL(n)
 	node *parent = searchTreeForNumber(n->data->number, root);
 	n->parent = parent;
 	if (n->data->number < parent->data->number) {
@@ -96,9 +103,7 @@ node *findNode(node *root, int number) {
 
 void kidnap(node *n) {
 	//remove node from its parent
-	if (! n->parent)
-		return;
-
+	NOTNULL(n->parent)
 	if (n->parent->left == n)
 		n->parent->left = NULL;
 	else
