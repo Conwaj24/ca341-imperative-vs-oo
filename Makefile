@@ -4,8 +4,8 @@ MANPREFIX = $(PREFIX)/share/man
 TITLE = phonebook
 MANPAGE = ${TITLE}.1.gz
 
-SRC = ${TITLE}.c
-OBJ = ${TITLE}.o
+SRC = phonebook.c testing.c extra.c
+OBJ = ${SRC:.c=.o}
 
 all: ${OBJ} #${MANPAGE}
 
