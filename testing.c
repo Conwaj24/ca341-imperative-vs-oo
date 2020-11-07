@@ -19,6 +19,7 @@ void exploreTree(node *curr) {
 			case 'x':
 				removeFromTree(curr->data->number);
 				exploreTree(root);
+				break;
 			default:
 				error("invalid key");
 		}

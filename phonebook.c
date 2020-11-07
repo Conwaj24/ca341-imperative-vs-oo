@@ -110,16 +110,29 @@ void kidnap(node *n) {
 		n->parent->right = NULL;
 }
 	
+void setAsRoot(node *n) {
+	root = n;
+	n->parent=NULL;
+}
+
 void removeNodeFromTree(node* n) {
 	kidnap(n);
-	if (!n->parent)
-		root = n->left;
-	else
+	if (n == root && n->left) {
+		setAsRoot(n->left);
+		addNodeToTree(n->right);
+		freeNode(n);
+	} else if (n == root && n->left) {
+		setAsRoot(n->left);
+		freeNode(n);
+	} else if (n == root) {
+		root = NULL;
+		printf("Warning! Tree is empty", stderr);
+		freeNode(n);
+	} else {
 		addNodeToTree(n->left);
-	n->left = NULL;
-	addNodeToTree(n->right);
-	n->right = NULL;
-	freeNode(n);
+		addNodeToTree(n->right);
+		freeNode(n);
+	}
 }
 
 void removeFromTree(int key) {
