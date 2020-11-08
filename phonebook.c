@@ -119,22 +119,21 @@ void setAsRoot(node *n) {
 
 void removeNodeFromTree(node* n) {
 	kidnap(n);
-	if (n == root && n->left) {
-		setAsRoot(n->left);
-		addNodeToTree(n->right);
-		freeNode(n);
-	} else if (n == root && n->right) {
-		setAsRoot(n->right);
-		freeNode(n);
-	} else if (n == root) {
-		root = NULL;
-		printf("Warning! Tree is empty", stderr);
-		freeNode(n);
+	if (n == root) {
+		if (n->left) {
+			setAsRoot(n->left);
+			addNodeToTree(n->right);
+		} else if (n->right)
+			setAsRoot(n->right);
+		else {
+			root = NULL;
+			printf("Warning! Tree is empty", stderr);
+		}
 	} else {
 		addNodeToTree(n->left);
 		addNodeToTree(n->right);
-		freeNode(n);
 	}
+	freeNode(n);
 }
 
 void removeFromTree(int key) {
