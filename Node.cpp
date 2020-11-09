@@ -1,6 +1,7 @@
 #include "PhoneBookEntry.cpp"
+#include "Comparable.cpp"
 
-class Node {
+class Node: public Comparable {
 	Node *left;
 	Node *right;
 	Node *parent;
@@ -16,13 +17,11 @@ class Node {
 			parent = nullptr;
 		}
 
-		virtual bool operator<(Node *n) = 0;
-		virtual bool operator>(Node *n) = 0;
-		virtual bool operator==(Node *n) = 0;
-
 		void setLeft(Node *n) { left = n; }
 		void setRight(Node *n) { right = n; }
 		void setParent(Node *n) { parent = n; }
+
+		virtual Comparable getKey() = 0;
 
 		Node *getLeft() { return left; }
 		Node *getRight() { return right; }
