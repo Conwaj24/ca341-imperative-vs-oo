@@ -2,17 +2,15 @@
 #include "PhoneBookEntry.cpp"
 #include "IComparable.cpp"
 
-class Node: public IComparable<Node *> {
+template <typename T>
+class Node {
 	Node *left;
 	Node *right;
 	Node *parent;
-
 	public:
-		PhoneBookEntry *data;
+		PhoneBookEntry& data;
 
-		Node(PhoneBookEntry *data) {
-			this->data=data;
-
+		Node(PhoneBookEntry &givenData) : data(givenData) {
 			left = nullptr;
 			right = nullptr;
 			parent = nullptr;
@@ -25,6 +23,14 @@ class Node: public IComparable<Node *> {
 		Node *getLeft() { return left; }
 		Node *getRight() { return right; }
 		Node *getParent() { return parent; }
+
+		virtual bool operator<(Node& cmp) = 0;
+		virtual bool operator>(Node& cmp) = 0;
+		virtual bool operator==(Node& cmp) = 0;
+
+		virtual bool operator<(T cmp) = 0;
+		virtual bool operator>(T cmp) = 0;
+		virtual bool operator==(T cmp) = 0;
 
 		void add(Node *n) {
 			if (n < this) {
@@ -45,6 +51,6 @@ class Node: public IComparable<Node *> {
 		}
 
 		void display() {
-			data->display();
+			data.display();
 		}
 };

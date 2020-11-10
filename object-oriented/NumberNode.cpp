@@ -1,8 +1,10 @@
 #include "Node.cpp"
 
-class NumberNode: public Node{
+class NumberNode: public Node<int>{
 	public:
-		bool operator<(Node *n) {return this->data->number < n->data->number;}
-		bool operator>(Node *n) {return this->data->number > n->data->number;}
-		bool operator==(Node *n) {return this->data->number == n->data->number;}
+		NumberNode(PhoneBookEntry *pbe)     : Node(*pbe) {};
+
+		bool operator<(Node& n) {return this->data.number < n.data.number;}
+		bool operator>(Node& n) {return this->data.number > n.data.number;}
+		bool operator==(Node& n) {return this->data.number == n.data.number;}
 };
