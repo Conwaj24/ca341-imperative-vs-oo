@@ -1,6 +1,5 @@
 #pragma once
 #include "PhoneBookEntry.cpp"
-#include "IComparable.cpp"
 
 template <typename T>
 class Node {
@@ -59,7 +58,37 @@ class Node {
 				return this;
 		}
 
+		void orphan() {
+			if (!parent)
+				return;
+			if (parent->left == this)
+				parent->left = nullptr;
+			else
+				parent->right = nullptr;
+		}
+
 		void display() {
 			data.display();
+		}
+
+		void remove() {
+			if (!parent) //not our responsibility if we are the root node
+				return;
+
+			orphan();
+			if (left) {
+				parent->add(left);
+				left = nullptr;
+			} if (right) {
+				parent->add(right);
+				right = nullptr;
+			}
+			delete this;
+		}
+
+		~Node() {
+			orphan();
+			delete left;
+			delete right;
 		}
 };
