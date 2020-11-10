@@ -1,7 +1,8 @@
+#pragma once
 #include "PhoneBookEntry.cpp"
-#include "Comparable.cpp"
+#include "IComparable.cpp"
 
-class Node: public Comparable {
+class Node: public IComparable<Node *> {
 	Node *left;
 	Node *right;
 	Node *parent;
@@ -20,8 +21,6 @@ class Node: public Comparable {
 		void setLeft(Node *n) { left = n; }
 		void setRight(Node *n) { right = n; }
 		void setParent(Node *n) { parent = n; }
-
-		virtual Comparable getKey() = 0;
 
 		Node *getLeft() { return left; }
 		Node *getRight() { return right; }
