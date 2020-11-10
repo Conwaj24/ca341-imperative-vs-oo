@@ -50,6 +50,15 @@ class Node {
 			}
 		}
 
+		Node<T> search(T target) {
+			if (this > target && left)
+				return left->search(target);
+			else if (this < target && right)
+				return right->search(target);
+			else
+				return this;
+		}
+
 		void display() {
 			data.display();
 		}
