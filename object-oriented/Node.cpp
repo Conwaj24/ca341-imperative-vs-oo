@@ -23,13 +23,15 @@ class Node {
 		Node *getRight() { return right; }
 		Node *getParent() { return parent; }
 
-		virtual bool operator<(Node& cmp) = 0;
-		virtual bool operator>(Node& cmp) = 0;
-		virtual bool operator==(Node& cmp) = 0;
+		virtual T getKey() const = 0;
 
-		virtual bool operator<(T cmp) = 0;
-		virtual bool operator>(T cmp) = 0;
-		virtual bool operator==(T cmp) = 0;
+		bool operator<(Node& cmp) {getKey() < cmp.getKey;} ;
+		bool operator>(Node& cmp) {getKey() > cmp.getKey;} ;
+		bool operator==(Node& cmp) {getKey() == cmp.getKey;} ;
+
+		bool operator<(T cmp) {getKey() < cmp;} ;
+		bool operator>(T cmp) {getKey() > cmp;} ;
+		bool operator==(T cmp) {getKey() == cmp;} ;
 
 		void add(Node *n) {
 			if (n < this) {
